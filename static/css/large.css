@@ -1,0 +1,223 @@
+/*
+Theme Name: Ubuntu Resources
+Theme URI: http://canonical.com
+Description: Ubuntu resource hub theme
+Version: 1
+Author: Canonical Ltd
+Author URI: http://canonical.com
+
+Copyright (C) 2012 Canonical Ltd
+
+Contents:
+
+	typography
+	main navigation
+	welcome-message
+	search
+	share
+	product-business-card
+
+*/
+/**
+ * Ubuntu Patterns Stylesheet
+ *
+ * The CSS file required by Ubuntu patterns page
+ * 
+ * @project		Ubuntu Patterns
+ * @author		Web Team at Canonical Ltd
+ * @copyright	2012 Canonical Ltd
+ *
+ * @see 		http://design.ubuntu.com
+ */
+/**
+ * standard colors
+ *
+ * @colordef standard colors
+ */
+/**
+ * mixins
+ *
+ * @section mixins
+ */
+/* ubuntu orange */
+/* used as background on pre text */
+/* warm grey */
+/* cool grey */
+/* light grey */
+/* meta grey */
+/* assets database path */
+/* usage: background: url(//assets.ubuntu.com/sites/ubuntu/latest/u/img//site/background.jpg) no-repeat 0 0; */
+body {
+  background-attachment: fixed;
+  font-size: 16px; }
+
+body:after {
+  content: 'large';
+  display: none; }
+
+.wrapper {
+  background: none; }
+
+header.banner {
+  margin-bottom: 0; }
+
+header.banner .nav-primary .topics {
+  border-top: 0; }
+
+header.banner .nav-primary ul li.active a,
+body.page-template-page-press-php .nav-primary ul li.press-center a {
+  background-color: #b83a10; }
+
+header.banner .nav-primary li.press-center {
+  display: block; }
+
+header.banner .nav-primary .nav-press-centre {
+  display: none; }
+
+header.banner .nav-primary li.topics a {
+  border-right: 0 !important;
+  border-bottom: 0 !important; }
+
+header.banner .nav-primary li.topics a:link,
+header.banner .nav-primary li.topics a:visited {
+  display: block;
+  border-right: 0 !important;
+  border-bottom: 0 !important; }
+
+.row .inner-wrapper {
+  display: block;
+  float: none;
+  margin: 0 auto;
+  width: 984px; }
+
+#nav-global {
+  padding-left: 0; }
+
+.row {
+  padding: 30px 30px 20px; }
+
+.header-inner {
+  width: 984px; }
+
+.row .link-cta-ubuntu {
+  display: inline-block;
+  text-align: inherit; }
+
+h1 {
+  font-size: 2.8125em; }
+
+#welcome-message div.welcome-message-inner {
+  padding: 0;
+  position: relative; }
+
+footer.global .legal {
+  padding-left: 0;
+  padding-top: 13px; }
+
+.single-post-cats {
+  padding-top: 0; }
+
+#main-content .single-post-cats ul {
+  padding-left: 0; }
+
+#main-content .cat-page-title {
+  padding-bottom: 20px; }
+
+.article-list ul.phone-articles {
+  border-bottom: 0; }
+
+.glossary-box {
+  padding: 0; }
+  .glossary-box .inner-wrapper {
+    background-size: 210px 210px;
+    background-position: 100% -20px, 80% 148px; }
+
+.glossary-box .inner-wrapper {
+  min-height: 330px; }
+
+body.category .glossary-box .inner-wrapper,
+body.category .glossary-box-articles .inner-wrapper,
+body.tag .glossary-box .inner-wrapper,
+body.tag .glossary-box-articles .inner-wrapper,
+body.page-template-page-category-php .glossary-box .inner-wrapper,
+body.page-template-page-category-php .glossary-box-articles .inner-wrapper {
+  min-height: 0;
+  padding-bottom: 10px; }
+
+body.archive .glossary-box .inner-wrapper {
+  padding-bottom: 0; }
+
+body.tag .glossary-box .inner-wrapper {
+  padding-bottom: 10px; }
+
+.glossary-box-desktop .inner-wrapper,
+.glossary-box-cloud .inner-wrapper,
+.glossary-box-server .inner-wrapper,
+.glossary-box-phone .inner-wrapper,
+.glossary-box-tablet .inner-wrapper,
+.glossary-box-internet-of-things .inner-wrapper {
+  background-size: 210px 210px;
+  background-position: 90% 50%;
+  padding-bottom: 40px; }
+
+.glossary-box-internet-of-things .inner-wrapper {
+  background-size: 337px 240px; }
+
+.glossary-box--home {
+  padding: 40px 30px 0; }
+  .glossary-box--home .inner-wrapper {
+    min-height: 200px; }
+  .glossary-box--home .inner-wrapper .last-col {
+    background-size: 240px 240px;
+    height: 251px;
+    width: 251px;
+    top: -28px;
+    right: 43px; }
+
+.search .row {
+  padding-bottom: 40px; }
+
+.search .no-results {
+  display: inline-block;
+  float: left;
+  margin-bottom: 40px;
+  width: 100%; }
+
+.search #main-content form#search-form {
+  margin-bottom: 20px; }
+
+form fieldset .search-submit {
+  top: -105px; }
+
+form fieldset .search-submit.active {
+  float: left;
+  margin-bottom: 20px;
+  width: auto; }
+
+.search-filter fieldset.twelve-col {
+  margin: 0; }
+
+.product-business-card img {
+  float: right;
+  margin: 0 0 20px 20px; }
+
+.single #sidebar .list-social li {
+  margin: 0 6px 0 0; }
+
+.video-wrapper {
+  padding-top: 50px;
+  margin-bottom: 80px; }
+
+.video-wrapper iframe {
+  top: 50px; }
+
+footer.global .top-link {
+  display: none; }
+
+.yes-js #main-nav.active li li a {
+  font-size: 18px; }
+
+body.page-template-page-press-php .row-resource-list .six-col {
+  min-height: 13em; }
+
+/*# sourceMappingURL=large.css.map */

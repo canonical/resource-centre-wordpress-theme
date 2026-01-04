@@ -1,0 +1,526 @@
+/*
+Theme Name: Ubuntu Resources
+Theme URI: http://canonical.com
+Description: Ubuntu resource hub theme
+Version: 1
+Author: Canonical Ltd
+Author URI: http://canonical.com
+
+Copyright (C) 2012 Canonical Ltd
+
+Contents:
+
+	general
+	welcome-message
+	search
+	single article
+	glossary-box
+	main nav
+	related posts
+	product-business-card
+	events
+	search filters
+	vcard
+*/
+
+@import "core-constants";
+@import "core-mixins";
+
+$ubuntu_orange:         #dd4814; 	/* ubuntu orange */
+$light_orange:          #fdf6f2; 	/* used as background on pre text */
+$warm_grey:             #aea79f; 	/* warm grey */
+$cool_grey:             #333333; 	/* cool grey */
+$light_grey:            #f7f7f7; 	/* light grey */
+$meta_grey:             #888; 		/* meta grey */
+$nav_bg:                #F7F7F7;
+$nav_link_color:        #333;
+$nav_border_dark:       #d4d7d4;
+$nav_border_light:      #f2f2f4;
+
+$base: 14;
+
+/* assets database path */
+$asset_path: "//assets.ubuntu.com/sites/ubuntu/latest/u/img/";
+/* usage: background: url(#{$asset_path}/folder/image.jpg) no-repeat 0 0; */
+
+$grid_unit_small: 10;
+$grid_unit_med:   20;
+
+@mixin font_size($size) {
+  font-size: ($size) + px;  //Fallback in px
+  font-size: calculateem($size);
+}
+
+/* general
+----------------------------------------------------------------- */
+body { background: url("#{$asset_path}backgrounds/image-background-paper.png") repeat-y center center; }
+
+body:after {
+	content: 'medium';
+	display: none;
+}
+
+.col, .eight-col, .eleven-col, .five-col, .four-col, .nine-col, .one-col, .seven-col, .six-col, .ten-col, .three-col, .twelve-col, .two-col { margin-right: 2.128%; }
+
+#nav-global {
+	@include box_sizing();
+	padding-left: 9px;
+	
+	a.external {
+    	background: none;
+    	padding-left: 0;
+    	padding-right: 0;
+	}
+
+	ul li.open { min-width: 122px; }
+
+	li.more li { height: auto;
+		a {
+			border-bottom: 0;
+			padding-bottom: 0;
+		}
+	}
+} // end nav-global
+
+.last-col { margin-right: 0; }
+
+body { font-size: 15px; }
+
+.row { padding: 30px 30px 20px; }
+
+.tax-topic .row,
+.category .row,
+.row-events,
+.search .row { padding-bottom: 20px; }
+
+.tax-topic #main-content .row-hero {
+	padding-bottom: 0;
+	margin-bottom: 0;	
+}
+
+.search #main-content .row-hero {
+	margin-bottom: -20px;
+	margin-top: 0;
+	padding-bottom: 0;
+}
+
+.inner-wrapper {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#main-content .cat-title { padding: 0 30px 0 0; }
+
+.page-template-page-category-php #main-content .cat-title,
+.tax-topic #main-content .cat-title  {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.page-template-default #main-content .cat-page-title {
+	padding: 0 30px 10px;
+}
+
+.article-list ul.phone-articles { border-bottom: 0; }
+
+.row h3 {
+	@include font_size(18.75);
+}
+
+.featured h3 {
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+/* search
+----------------------------------------------------------------- */
+form fieldset .search-submit { top: -101px; }
+
+.has-filter-wrap fieldset .search-submit,
+form fieldset .search-submit.active {
+	float: left;
+	width: auto;
+}
+
+.has-filter-wrap button.search-submit + a {
+	margin-top: 27px;
+	margin-left: 10px;
+}
+
+.search #main-content form#search-form {
+	border-bottom: 1px dotted $warm_grey;
+	margin-bottom: 10px;
+}
+
+.search #main-content form#search-form div.active{
+	float: left;
+	display: inline-block;
+	width: 100%;
+}
+
+.search-filter div.has-filter + fieldset.twelve-col {
+	@include rounded_corners(0);
+	border-bottom: 0;
+	padding-bottom: 20px;
+	margin-bottom: 0;
+}
+
+.search-filter fieldset.twelve-col {
+	max-height: 100px;
+	display: block;
+	float: none;
+	margin: 0 0 20px;
+	padding: 0;
+}
+
+.search-filter h2 { margin-bottom: 20px; }
+
+/* single article
+----------------------------------------------------------------- */
+body.single .row { padding-top: 10px; }
+
+.single #sidebar .list-social li {
+    margin-bottom: 10px;   
+    margin-right: 13px;
+}
+
+#main-content .single-post-cats { padding-top: 0; }
+
+.single-post-cats .inner-wrapper { padding-top: 0; }
+
+.social-links li {
+	float: none;
+	margin-right: 0;
+}
+
+.article-meta-wrap { 	
+    margin-bottom: 10px; 
+    
+}
+
+.article-meta { margin-right: 10px; }
+
+.single .article-meta { 
+    margin-bottom: 20px; 
+    padding-bottom: 0;
+}
+
+/* glossary-box
+----------------------------------------------------------------- */
+.glossary-box { 
+    background: #fff;
+    color: #333;
+    margin-top: -20px;
+    box-shadow: 0 2px 2px 0 rgba(212,212,212, .7);
+    padding-bottom: 0;
+    padding-top: 0;
+
+    .inner-wrapper {
+        background-size: 180px 180px;
+        background-repeat: no-repeat;
+        background-position: 100% -20px, 70% 130%;
+        padding: 40px 0 40px;
+        overflow: hidden;
+    }
+    
+    .inner-wrapper .last-col {
+        background-repeat: no-repeat;
+        background-position: right bottom;
+        position: absolute;
+    }
+}
+
+.glossary-box--home { 
+    background: #2c001e;
+    color: #fff;
+    padding: 30px 30px 0;
+    margin-top: 0;
+    
+    .inner-wrapper {
+        min-height: 165px;
+
+        .last-col {
+            background-image: url('//insights.ubuntu.com/wp-content/uploads/picto-knowledge-orange-and-white.png');
+            background-size: 180px 180px;
+            height: 220px;
+            right: 10px;
+            top: -38px;
+            width: 200px;
+        }
+    }
+}
+
+body.page-template-page-topics-php .glossary-box-cloud-and-server .inner-wrapper,
+.glossary-box-desktop .inner-wrapper,
+.glossary-box-internet-of-things  .inner-wrapper {
+    background-size: 180px 180px;
+    background-position: 94% 50%;
+}
+
+.glossary-box-cloud-and-server .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-server-midaubergine.svg"), url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");
+}
+
+.glossary-box-cloud .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");
+}
+
+.glossary-box-server .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-server-midaubergine.svg");
+}
+
+.glossary-box-press-centre .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-bookmark-midaubergine.svg"), url("#{$asset_path}pictograms/picto-pack/picto-articles-orange.svg");
+}
+
+.glossary-box-desktop .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-desktop-orange.svg");
+}
+
+.glossary-box-phone-and-tablet .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-phone-midaubergine.svg"), url("static/img/pictograms/picto-tablet-orange.svg");
+}
+
+.glossary-box-phone .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-phone-orange.svg");
+}
+
+.glossary-box-tablet .inner-wrapper {
+    background-image: url("static/img/pictograms/picto-tablet-orange.svg");
+}
+
+.glossary-box-chatter-cloud .inner-wrapper {
+    background-image: url("#{$asset_path}pictograms/picto-pack/picto-articles-midaubergine.svg"), url("#{$asset_path}pictograms/picto-pack/picto-cloudcomputing-orange.svg");
+}
+
+.glossary-box-internet-of-things  .inner-wrapper {
+  background-image: url('#{$asset_path}cloud/tools/snappy/snappy.png');
+}
+
+.archive .featured-article, .page-template .featured-article { margin-bottom: 0 }
+
+.tax-topic .featured-article {
+	padding-bottom: 20px;
+}
+
+.home .featured-article {
+	margin-bottom: 0
+}
+
+.home aside {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+/* main nav
+----------------------------------------------------------------- */
+header.banner .nav-primary ul li.active a,
+body.page-template-page-press-php .nav-primary ul li.press-center a {
+    font-weight: 400;
+}
+
+/* related posts
+----------------------------------------------------------------- */
+/* product-business-card
+----------------------------------------------------------------- */
+.product-business-card {
+
+    p.intro {
+        font-size: 1em;
+    }
+    
+    img {
+	    display: block;
+        float: none;
+        margin: 0 auto;
+    }
+}
+
+/* events
+----------------------------------------------------------------- */
+.event-details-wrapper,
+.vertical-divider .event-details-wrapper {
+	margin-bottom: 20px;
+	padding-left: 120px;
+}
+
+.event-details-wrapper:last-of-type { margin-bottom: 20px; }
+
+.single .event-details-wrapper {
+	min-height: 120px;
+	margin-bottom: 20px;
+}
+
+.event-details-wrapper h3 {
+	clear: none;
+	display: block;
+	float: none;
+	width: auto;
+}
+
+.event-details {
+	margin-bottom: 10px;
+	width: 100%;
+	clear: both;
+	display: block;
+	margin-top: 0;
+}
+
+.event-map {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.image-wrap { background-size: 100px 100px; }
+
+.image-wrap img,
+body.single .eight-col .image-wrap img,
+.event-map,
+.event-map img {
+	height: 100px;
+	width: 100px;
+}
+
+.image-wrap:after,
+.featured-article .image-wrap:after {
+	background-size: 100px 100px;
+	height: 100px;
+	width: 100px;
+}
+
+.article-list li.row:nth-child(2n) .image-wrap:after,
+.article-list div.row:nth-child(2n) .image-wrap:after { background-size: 100px 100px; }
+
+.row-resource-list li {
+	float: left;
+	margin-right: 0;
+	width: 33%;
+}
+
+.row-resource-list .six-col li {
+	width: 50%;
+}
+
+/* search filters
+----------------------------------------------------------------- */
+div#uwpqsf_id {
+
+	.togglecheck { width: 40%; }
+}
+
+/* vcard
+----------------------------------------------------------------- */
+#author-info.has-avatar { padding-left: 120px; }
+
+.vcard .avatar {
+	position: absolute;
+	left: 0;
+}
+
+/* main navigation
+----------------------------------------------------------------- */
+
+.yes-js {
+	#main-navigation {
+		background: $nav_bg;
+		float: none;
+		margin: 0 auto;
+		max-width: 984px;
+		position: relative;
+	}
+
+	#main-nav.active {
+		@include rounded_corners(0 0 2px 2px);
+		background: $nav_bg;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+		width: 400px;
+		display: block;
+		float: right;
+		right: 0;
+		position: absolute;
+	}
+
+	#main-nav.active h2 {
+		background: none;
+	}
+
+	#main-nav.active li li a {
+		font-size: 18px;
+	}
+
+	#main-nav.active a {
+		color: #333;
+		}
+
+	#main-nav.active
+
+	.main-nav {
+		background: none;
+		border-right: 0;
+		border-bottom: 0;
+		box-shadow: none;
+	}
+	
+	#main-nav .press-nav {
+		position: relative;
+		left: auto;
+	}
+	
+	#main-nav .type-nav li li:last-child a {
+		border-right: 1px solid $nav_border_dark;
+		margin-top: -1px;
+		padding-top: 9px;
+		padding-bottom: 8px;
+		border-bottom: 0;
+	}
+		
+	#main-nav .press-nav li li:last-child {
+		border-bottom: 1px solid $nav_border_dark;
+	}
+	
+	#main-nav .press-nav li li {
+		
+	}
+		
+	#main-nav.active {
+		width: 500px;
+		
+		.topic-nav {
+			border-bottom: 0;
+			border-left: 0;
+			
+			.nav-tablet {
+				border: 0;
+			}
+		}
+	}/* end main nav */
+
+} // end yes-js
+
+/* search
+----------------------------------------------------------------- */
+.yes-js #box-search {
+	background: $nav_bg;
+}
+
+.yes-js #box-search div {
+	@include rounded_corners(0 0 2px 2px);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+	background: $nav_bg;
+	padding: 10px;
+}
+
+.yes-js header.global #box-search {
+	margin: 0 auto;
+	float: none;
+	max-width: 984px;
+}
+
+.yes-js header.global #box-search div.active {
+	display: block;
+	right: 0;
+	position: absolute;
+	width: 400px;
+}
