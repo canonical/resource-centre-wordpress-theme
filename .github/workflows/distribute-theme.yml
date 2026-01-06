@@ -53,7 +53,10 @@ jobs:
 
           # Create ZIP file
           cd "${TEMP_DIR}"
-          zip -r resource-centre-v${{ steps.version.outputs.version }}.zip resource-centre/
+          zip -r resource-centre-v${{ steps.version.outputs.version }}.zip resource-centre/ \
+            -x "resource-centre/.git/*" \
+               "resource-centre/.github/*" \
+               "resource-centre/README.md"
 
           # Move ZIP to workspace root
           mv resource-centre-v${{ steps.version.outputs.version }}.zip ${{ github.workspace }}/
@@ -84,11 +87,8 @@ jobs:
             - `functions.php` - Main theme functions
             - `index.php` - Theme template
             - `screenshot.png` - Theme preview image
-            - `README.md` - Documentation
             - `functions/` - Theme functions modules
             - `static/` - Theme static assets
-
-            For more information, see the README.md included in the ZIP.
           files: |
             resource-centre-v${{ steps.version.outputs.version }}.zip
           draft: false
