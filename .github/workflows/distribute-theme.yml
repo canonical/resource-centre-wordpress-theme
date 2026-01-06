@@ -1,0 +1,106 @@
+name: Create Theme Distribution
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Extract version from style.css
+      - name: Extract version from style.css
+        id: version
+        run: |
+          VERSION=$(grep "^Version:" style.css | sed 's/Version: *//')
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Extracted version: ${VERSION}"
+
+      # Step 3: Check if release already exists
+      - name: Check if release exists
+        id: check_release
+        run: |
+          RELEASE_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/v${{ steps.version.outputs.version }}")
+          if [ "$RELEASE_EXISTS" = "200" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Release v${{ steps.version.outputs.version }} already exists"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Release v${{ steps.version.outputs.version }} does not exist"
+          fi
+
+      # Step 4: Create distribution ZIP
+      - name: Create distribution ZIP
+        if: steps.check_release.outputs.exists == 'false'
+        run: |
+          TEMP_DIR=$(mktemp -d)
+          THEME_DIR="${TEMP_DIR}/resource-centre"
+
+          # Create theme directory and copy everything
+          mkdir -p "${THEME_DIR}"
+          cp -r . "${THEME_DIR}/"
+
+          # Create ZIP file
+          cd "${TEMP_DIR}"
+          zip -r resource-centre-v${{ steps.version.outputs.version }}.zip resource-centre/
+
+          # Move ZIP to workspace root
+          mv resource-centre-v${{ steps.version.outputs.version }}.zip ${{ github.workspace }}/
+
+          echo "ZIP created: resource-centre-v${{ steps.version.outputs.version }}.zip"
+
+      # Step 5: Create GitHub Release
+      - name: Create GitHub Release
+        if: steps.check_release.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: Version ${{ steps.version.outputs.version }}
+          body: |
+            # Ubuntu Resources WordPress Theme v${{ steps.version.outputs.version }}
+
+            This release contains the distributable WordPress theme package.
+
+            ## Installation
+
+            1. Download the ZIP file from this release
+            2. Install via WordPress CLI: `wp theme install resource-centre-v${{ steps.version.outputs.version }}.zip --activate`
+            3. Or extract to your WordPress themes directory: `wp-content/themes/`
+
+            ## Files Included
+
+            - `style.css` - Theme stylesheet with metadata
+            - `functions.php` - Main theme functions
+            - `index.php` - Theme template
+            - `screenshot.png` - Theme preview image
+            - `README.md` - Documentation
+            - `functions/` - Theme functions modules
+            - `static/` - Theme static assets
+
+            For more information, see the README.md included in the ZIP.
+          files: |
+            resource-centre-v${{ steps.version.outputs.version }}.zip
+          draft: false
+          prerelease: false
+
+      # Step 6: Report status
+      - name: Report release status
+        if: always()
+        run: |
+          if [ "${{ steps.check_release.outputs.exists }}" = "true" ]; then
+            echo "Release v${{ steps.version.outputs.version }} already exists. Skipping creation."
+            exit 0
+          else
+            echo "Successfully created release v${{ steps.version.outputs.version }}"
+          fi
