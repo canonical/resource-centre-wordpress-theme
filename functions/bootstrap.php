@@ -49,6 +49,11 @@ if ( is_admin() ) {
 require_once RC_FUNCTIONS_DIR . '/helpers/taxonomy-sync.php';
 require_once RC_FUNCTIONS_DIR . '/helpers/validation.php';
 
+// Loaded unconditionally, not under the is_admin() branch above: the block
+// editor creates categories and publishes posts over the REST API, where
+// is_admin() is false.
+require_once RC_FUNCTIONS_DIR . '/helpers/capabilities.php';
+
 /**
  * Theme Setup
  */
