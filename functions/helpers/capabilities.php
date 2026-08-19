@@ -34,3 +34,28 @@ function rc_lock_taxonomy_terms( $args, $taxonomy ) {
 	return $args;
 }
 add_filter( 'register_taxonomy_args', 'rc_lock_taxonomy_terms', 10, 2 );
+
+/**
+ * Backstop for flat taxonomies: core's REST controller lets anyone with
+ * `assign_terms` CREATE a term in a non-hierarchical taxonomy (tags), so the
+ * capability mapping above cannot block Enter-to-create in the editor without
+ * also breaking tag assignment. `pre_insert_term` fires inside
+ * wp_insert_term() itself, covering REST, classic admin and ajax alike.
+ * No-user contexts (WP-CLI, imports, migration scripts) are exempt.
+ */
+function rc_block_term_creation( $term, $taxonomy ) {
+	if (
+		in_array( $taxonomy, array( 'category', 'post_tag' ), true )
+		&& get_current_user_id()
+		&& ! current_user_can( 'manage_options' )
+	) {
+		return new WP_Error(
+			'rc_term_creation_locked',
+			__( 'New categories and tags can only be added by an administrator, from the Categories / Tags screens.', 'resource-centre' ),
+			array( 'status' => 403 )
+		);
+	}
+
+	return $term;
+}
+add_filter( 'pre_insert_term', 'rc_block_term_creation', 10, 2 );
