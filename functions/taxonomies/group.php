@@ -75,7 +75,20 @@ add_action( 'init', 'rc_register_group_taxonomy', 0 );
  * already assigned to old posts stay assigned; they are only hidden from
  * the picker.
  */
-const RC_APPROVED_GROUP_SLUGS = array();
+const RC_APPROVED_GROUP_SLUGS = array(
+	'internet-of-things',
+	'security-and-compliance',
+	'cloud-and-infrastructure',
+	'enterprise-administration',
+	'data-and-ai-ml',
+	'ubuntu-and-linux',
+	'developers-and-community',
+	'hardware-enablement',
+	'partners',
+	'industries-and-verticals',
+	'software-and-frameworks',
+	'company',
+);
 
 /**
  * Restrict the editor's group picker to the approved list.
