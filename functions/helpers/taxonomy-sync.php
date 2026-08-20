@@ -62,4 +62,8 @@ function rc_auto_assign_group_from_topic( $post_id ) {
 		wp_set_post_terms( $post_id, $groups_to_assign, 'group', true );
 	}
 }
-add_action( 'save_post', 'rc_auto_assign_group_from_topic', 20 );
+// Unhooked as part of the curated-groups migration: this wrote groups from
+// topic terms behind the editor's back, re-adding retired groups whenever a
+// legacy post was saved. Topics are no longer settable in the editor and
+// groups are now a curated list, so the sync would only fight the cleanup.
+// add_action( 'save_post', 'rc_auto_assign_group_from_topic', 20 );

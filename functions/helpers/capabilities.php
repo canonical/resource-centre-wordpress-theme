@@ -45,7 +45,7 @@ add_filter( 'register_taxonomy_args', 'rc_lock_taxonomy_terms', 10, 2 );
  */
 function rc_block_term_creation( $term, $taxonomy ) {
 	if (
-		in_array( $taxonomy, array( 'category', 'post_tag' ), true )
+		in_array( $taxonomy, array( 'category', 'post_tag', 'group' ), true )
 		&& get_current_user_id()
 		&& ! current_user_can( 'manage_options' )
 	) {
